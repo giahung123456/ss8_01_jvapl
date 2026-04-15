@@ -1,7 +1,7 @@
 package com.example.ss8.controller;
 
 import com.example.ss8.model.dto.AddressDto;
-import com.example.ss8.model.dto.WithdrawRequestDto;
+
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/test")
 public class TestController {
 
-    // --- BÀI 1: CẬP NHẬT ĐỊA CHỈ ---
+
     @GetMapping("/address")
     public String showAddressForm(Model model) {
         model.addAttribute("addressDto", new AddressDto());
@@ -31,19 +31,5 @@ public class TestController {
         return "redirect:/hr/success";
     }
 
-    // --- BÀI 3: RÚT TIỀN (FINTECH) ---
-    @GetMapping("/withdraw")
-    public String showWithdrawForm(Model model) {
-        model.addAttribute("withdrawDto", new WithdrawRequestDto());
-        return "withdraw-form";
-    }
 
-    @PostMapping("/withdraw")
-    public String handleWithdraw(@Valid @ModelAttribute("withdrawDto") WithdrawRequestDto withdrawDto,
-                                 BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "withdraw-form";
-        }
-        return "redirect:/hr/success";
-    }
 }

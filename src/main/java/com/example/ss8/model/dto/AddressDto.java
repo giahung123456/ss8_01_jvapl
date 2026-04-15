@@ -29,5 +29,5 @@ public class AddressDto {
     public void setDetailedAddress(String detailedAddress) {
         this.detailedAddress = detailedAddress;
     }
-    // Getters and Setters
+
 }

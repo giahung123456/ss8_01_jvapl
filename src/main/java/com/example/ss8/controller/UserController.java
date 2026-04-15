@@ -14,10 +14,7 @@ public class UserController {
 
     @PostMapping("/update")
     public ResponseEntity<String> updateAddress(@Valid @RequestBody AddressDto addressDto) {
-        // Nếu dữ liệu không hợp lệ, Spring sẽ tự động trả về 400 Bad Request
-        // kèm theo message lỗi mà không chạy vào logic bên dưới.
 
-        // Logic lưu database...
         return ResponseEntity.ok("Cập nhật địa chỉ thành công!");
     }
 }
