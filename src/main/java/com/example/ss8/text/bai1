@@ -1,0 +1,14 @@
+Phần 1: Phân tích logic
+Đoạn mã hiện tại gặp lỗi do hai nguyên nhân chính sau:
+
+Lỗi lọt khoảng trắng vào Database:
+
+Bạn đang sử dụng annotation @NotNull. Trong Bean Validation, @NotNull chỉ kiểm tra xem trường dữ liệu có bị null hay không.
+
+Nó không kiểm tra nội dung bên trong. Do đó, một chuỗi chỉ toàn dấu cách (ví dụ: "   ") vẫn được coi là khác null và vượt qua kiểm tra, dẫn đến việc lưu địa chỉ trống vào cơ sở dữ liệu.
+
+Lỗi không chặn được request từ Postman (Lỗi 500):
+
+Trong UserController, phương thức updateAddress nhận tham số AddressDto nhưng thiếu annotation @Valid (hoặc @Validated).
+
+Nếu không có @Valid, Spring Boot sẽ bỏ qua toàn bộ các ràng buộc validation trong DTO. Khi hacker gửi dữ liệu thiếu thông tin, logic xử lý bên trong (ví dụ: lưu vào DB) có thể gặp lỗi NullPointerException hoặc vi phạm ràng buộc dữ liệu ở tầng Database, dẫn đến lỗi 500 Internal Server Error thay vì trả về lỗi 400 Bad Request một cách tử tế.

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>.error { color: red; font-size: 0.9em; }</style>
+</head>
+<body>
+<h2>Cập nhật địa chỉ nhận hàng</h2>
+<form th:action="@{/test/address}" th:object="${addressDto}" method="post">
+    <div>
+        Tên người nhận: <input type="text" th:field="*{receiverName}" />
+        <p class="error" th:if="${#fields.hasErrors('receiverName')}" th:errors="*{receiverName}"></p>
+    </div>
+    <br>
+    <div>
+        Địa chỉ chi tiết: <input type="text" th:field="*{detailedAddress}" />
+        <p class="error" th:if="${#fields.hasErrors('detailedAddress')}" th:errors="*{detailedAddress}"></p>
+    </div>
+    <br>
+    <button type="submit">Cập nhật</button>
+</form>
+</body>
+</html>
